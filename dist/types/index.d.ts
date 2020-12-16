@@ -12,3 +12,4 @@ declare global {
 }
 export declare function loadNow(library: IGoogleMapsLibrary, apiKey?: string, region?: string, language?: string): Promise<IGoogleApi>;
 export declare function preload(library: IGoogleMapsLibrary, apiKey?: string, delay?: number): Promise<void>;
+export declare function unload(library: IGoogleMapsLibrary): void;

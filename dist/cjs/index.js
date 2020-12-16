@@ -231,6 +231,13 @@ async function preload(library, apiKey, delay = 2000) {
     await wait(delay);
     await addScriptTagToBrowser(library, apiKey);
 }
+function unload(library) {
+    const oldScript = document.getElementById(`#google-maps-${library}-js`);
+    if (oldScript !== null && oldScript.parentNode !== null) {
+        oldScript.parentNode.removeChild(oldScript);
+        delete window.google.maps;
+    }
+}
 async function addScriptTagToBrowser(library, apiKey, region, language, options = {}) {
     if (checkIfScriptTagExists(library)) {
         console.info(`Attempt to add script tag for the "${library}" library in Google Maps ignored as this tag already exists in the DOM${apiKey ? " [ " + apiKey + "]" : ""}`);
@@ -284,3 +291,4 @@ function checkIfScriptTagExists(library, apiKey) {
 
 exports.loadNow = loadNow;
 exports.preload = preload;
+exports.unload = unload;
