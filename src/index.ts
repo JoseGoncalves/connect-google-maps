@@ -51,6 +51,22 @@ export async function preload(
   await addScriptTagToBrowser(library, apiKey);
 }
 
+/**
+ * **unload**
+ *
+ * Unloads the given maps library function (e.g., places, maps, etc.)
+ */
+export function unload(
+  library: IGoogleMapsLibrary
+) {
+  const oldScript = document.getElementById(`#google-maps-${library}-js`);
+  if (oldScript !== null && oldScript.parentNode !== null) {
+    oldScript.parentNode.removeChild(oldScript);
+    // @ts-ignore
+    delete window.google.maps;
+  }
+}
+
 async function addScriptTagToBrowser(
   library: IGoogleMapsLibrary,
   apiKey?: string,
