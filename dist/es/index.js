@@ -228,9 +228,13 @@ async function preload(library, apiKey, delay = 2000) {
     await addScriptTagToBrowser(library, apiKey);
 }
 function unload(library) {
+    console.log('connect-gmaps: unload');
     const oldScript = document.getElementById(`#google-maps-${library}-js`);
+    console.log('connect-gmaps: oldScript', oldScript);
     if (oldScript !== null && oldScript.parentNode !== null) {
+        console.log('connect-gmaps: remove DOM');
         oldScript.parentNode.removeChild(oldScript);
+        console.log('connect-gmaps: delete object');
         delete window.google.maps;
     }
 }

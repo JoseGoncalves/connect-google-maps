@@ -59,9 +59,13 @@ export async function preload(
 export function unload(
   library: IGoogleMapsLibrary
 ) {
+  console.log('connect-gmaps: unload');
   const oldScript = document.getElementById(`#google-maps-${library}-js`);
+  console.log('connect-gmaps: oldScript', oldScript);
   if (oldScript !== null && oldScript.parentNode !== null) {
+    console.log('connect-gmaps: remove DOM');
     oldScript.parentNode.removeChild(oldScript);
+    console.log('connect-gmaps: delete object');
     // @ts-ignore
     delete window.google.maps;
   }
