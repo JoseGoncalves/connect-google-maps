@@ -63,10 +63,14 @@ export function unload(
   const script = document.querySelector(`#google-maps-${library}-js`)
   if (script !== null && script.parentNode !== null) {
     script.parentNode.removeChild(script);
-    const scriptList = document.querySelectorAll('script[src*="googleapis.com"]');
+    const scriptList = document.querySelectorAll('script[src*="maps.googleapis.com"]');
     scriptList.forEach(el => {
       if (el.parentNode) el.parentNode.removeChild(el);
     });
+    const fonts = document.querySelector('link[href*="fonts.googleapis.com"]');
+    if (fonts !== null && fonts.parentNode !== null) {
+      fonts.parentNode.removeChild(fonts);
+    }
     delete window.google.maps;
   }
 }
