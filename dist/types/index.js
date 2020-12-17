@@ -2,9 +2,7 @@ import { wait } from "common-types";
 const cache = {};
 const BASE_URL = "https://maps.googleapis.com/maps/api/js";
 export async function loadNow(library, apiKey, region, language) {
-    console.info('connect-gmaps: loadNow');
     if (checkIfScriptTagExists(library, apiKey)) {
-        console.info('connect-gmaps: Script already exists');
         return window.google;
     }
     await addScriptTagToBrowser(library, apiKey, region, language);
@@ -16,13 +14,9 @@ export async function preload(library, apiKey, delay = 2000) {
     await addScriptTagToBrowser(library, apiKey);
 }
 export function unload(library) {
-    console.info('connect-gmaps: unload');
-    const oldScript = document.getElementById(`#google-maps-${library}-js`);
-    console.info('connect-gmaps: oldScript', oldScript);
-    if (oldScript !== null && oldScript.parentNode !== null) {
-        console.info('connect-gmaps: remove DOM');
-        oldScript.parentNode.removeChild(oldScript);
-        console.info('connect-gmaps: delete object');
+    const script = document.querySelector(`#google-maps-${library}-js`);
+    if (script !== null && script.parentNode !== null) {
+        script.parentNode.removeChild(script);
         delete window.google.maps;
     }
 }
