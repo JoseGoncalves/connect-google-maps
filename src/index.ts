@@ -11,6 +11,7 @@ declare global {
   interface Window extends IDictionary {
     mapsLookupCallback?: () => void;
     placesLookupCallback?: () => void;
+    google?: any;
   }
 }
 
@@ -27,7 +28,9 @@ export async function loadNow(
   region?: string,
   language?: string
 ): Promise<IGoogleApi> {
+  console.log('connect-gmaps: loadNow');
   if (checkIfScriptTagExists(library, apiKey)) {
+    console.log('connect-gmaps: Script already exists');
     return window.google;
   }
   await addScriptTagToBrowser(library, apiKey, region, language);
@@ -66,7 +69,6 @@ export function unload(
     console.log('connect-gmaps: remove DOM');
     oldScript.parentNode.removeChild(oldScript);
     console.log('connect-gmaps: delete object');
-    // @ts-ignore
     delete window.google.maps;
   }
 }

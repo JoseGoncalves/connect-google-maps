@@ -8,6 +8,7 @@ declare global {
     interface Window extends IDictionary {
         mapsLookupCallback?: () => void;
         placesLookupCallback?: () => void;
+        google?: any;
     }
 }
 export declare function loadNow(library: IGoogleMapsLibrary, apiKey?: string, region?: string, language?: string): Promise<IGoogleApi>;

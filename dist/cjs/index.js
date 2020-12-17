@@ -220,7 +220,9 @@ if (!Array.isArray) {
 
 const BASE_URL = "https://maps.googleapis.com/maps/api/js";
 async function loadNow(library, apiKey, region, language) {
+    console.log('connect-gmaps: loadNow');
     if (checkIfScriptTagExists(library)) {
+        console.log('connect-gmaps: Script already exists');
         return window.google;
     }
     await addScriptTagToBrowser(library, apiKey, region, language);
