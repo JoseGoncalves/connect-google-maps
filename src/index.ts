@@ -28,9 +28,9 @@ export async function loadNow(
   region?: string,
   language?: string
 ): Promise<IGoogleApi> {
-  console.log('connect-gmaps: loadNow');
+  console.info('connect-gmaps: loadNow');
   if (checkIfScriptTagExists(library, apiKey)) {
-    console.log('connect-gmaps: Script already exists');
+    console.info('connect-gmaps: Script already exists');
     return window.google;
   }
   await addScriptTagToBrowser(library, apiKey, region, language);
@@ -62,13 +62,13 @@ export async function preload(
 export function unload(
   library: IGoogleMapsLibrary
 ) {
-  console.log('connect-gmaps: unload');
+  console.info('connect-gmaps: unload');
   const oldScript = document.getElementById(`#google-maps-${library}-js`);
-  console.log('connect-gmaps: oldScript', oldScript);
+  console.info('connect-gmaps: oldScript', oldScript);
   if (oldScript !== null && oldScript.parentNode !== null) {
-    console.log('connect-gmaps: remove DOM');
+    console.info('connect-gmaps: remove DOM');
     oldScript.parentNode.removeChild(oldScript);
-    console.log('connect-gmaps: delete object');
+    console.info('connect-gmaps: delete object');
     delete window.google.maps;
   }
 }

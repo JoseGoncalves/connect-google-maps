@@ -220,9 +220,9 @@ if (!Array.isArray) {
 
 const BASE_URL = "https://maps.googleapis.com/maps/api/js";
 async function loadNow(library, apiKey, region, language) {
-    console.log('connect-gmaps: loadNow');
+    console.info('connect-gmaps: loadNow');
     if (checkIfScriptTagExists(library)) {
-        console.log('connect-gmaps: Script already exists');
+        console.info('connect-gmaps: Script already exists');
         return window.google;
     }
     await addScriptTagToBrowser(library, apiKey, region, language);
@@ -234,13 +234,13 @@ async function preload(library, apiKey, delay = 2000) {
     await addScriptTagToBrowser(library, apiKey);
 }
 function unload(library) {
-    console.log('connect-gmaps: unload');
+    console.info('connect-gmaps: unload');
     const oldScript = document.getElementById(`#google-maps-${library}-js`);
-    console.log('connect-gmaps: oldScript', oldScript);
+    console.info('connect-gmaps: oldScript', oldScript);
     if (oldScript !== null && oldScript.parentNode !== null) {
-        console.log('connect-gmaps: remove DOM');
+        console.info('connect-gmaps: remove DOM');
         oldScript.parentNode.removeChild(oldScript);
-        console.log('connect-gmaps: delete object');
+        console.info('connect-gmaps: delete object');
         delete window.google.maps;
     }
 }
