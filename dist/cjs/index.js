@@ -240,10 +240,6 @@ function unload(library) {
             if (el.parentNode)
                 el.parentNode.removeChild(el);
         });
-        const fonts = document.querySelector('link[href*="fonts.googleapis.com"]');
-        if (fonts !== null && fonts.parentNode !== null) {
-            fonts.parentNode.removeChild(fonts);
-        }
         delete window.google.maps;
     }
 }
